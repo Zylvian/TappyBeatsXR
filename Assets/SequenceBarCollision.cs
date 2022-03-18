@@ -72,9 +72,9 @@ public class SequenceBarCollision : MonoBehaviour
 
         if(other.gameObject == closest)
         {
-            //closest.GetComponent<MeshRenderer>().material = standardMat;
-            //closest.GetComponent<Renderer>().sharedMaterial.SetFloat("_Smoothness", standardVal);
-            closest.GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Standard);
+            SeqBlockHandler handler = closest.GetComponent<SeqBlockHandler>();
+            handler.ToggleMaterial(MatStates.Standard);
+            handler.RemoveBlock(this.transform.parent.gameObject);
             closest = null;
         }
     }

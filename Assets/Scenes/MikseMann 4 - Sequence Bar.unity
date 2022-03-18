@@ -2817,9 +2817,7 @@ MonoBehaviour:
   bpm: 90
   log: 0
   isMuted: 0
-  sequencers:
-  - {fileID: 1511273488}
-  - {fileID: 1552020929}
+  sequencers: []
 --- !u!114 &1413941580
 MonoBehaviour:
   m_ObjectHideFlags: 0

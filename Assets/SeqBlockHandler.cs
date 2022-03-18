@@ -32,10 +32,23 @@ public class SeqBlockHandler : MonoBehaviour
         SequencerBase driver = seqBlock.GetComponent<SequencerDriver>();
 
         List<SequencerBase> driverList = fieldDriver.sequencers.ToList();
-        driverList.Add(driver);
-        fieldDriver.sequencers = driverList.ToArray();
+        if (!driverList.Contains(driver))
+        {
+            driverList.Add(driver);
+            fieldDriver.sequencers = driverList.ToArray();
+        }
+
 
         //seqBlock.SetActive(false);
+    }
+
+    public void RemoveBlock(GameObject seqBlock)
+    {
+        SequencerBase driver = seqBlock.GetComponent<SequencerDriver>();
+
+        List<SequencerBase> driverList = fieldDriver.sequencers.ToList();
+        driverList.Remove(driver);
+        fieldDriver.sequencers = driverList.ToArray();
     }
 
     public void TickToggle(bool enable)
