@@ -141,6 +141,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SilenceDriver
       objectReference: {fileID: 0}
+    - target: {fileID: 8536588248785222473, guid: 138e37925cb854242853ab9a897e87fe, type: 3}
+      propertyPath: Spatialize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536588248785222473, guid: 138e37925cb854242853ab9a897e87fe, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: eacc80228cf27544696f4e3e14b9554e, type: 2}
+    - target: {fileID: 8536588248785222473, guid: 138e37925cb854242853ab9a897e87fe, type: 3}
+      propertyPath: SpatializePostEffects
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8847416938400508736, guid: 138e37925cb854242853ab9a897e87fe, type: 3}
       propertyPath: m_RootOrder
       value: 0

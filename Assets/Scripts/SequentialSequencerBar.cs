@@ -10,7 +10,9 @@ public class SequentialSequencerBar : MonoBehaviour
 
     //public List<MusicFieldScript> fields = new List<MusicFieldScript>();
     public GameObject sequenceBar;
-    private List<SequencerDriver> driversToPlay = new List<SequencerDriver>();
+
+    [NonSerialized]
+    public List<SequencerDriver> driversToPlay = new List<SequencerDriver>();
     //private SequencerDriver masterDriver;
 
     private int currField = 0;
@@ -26,7 +28,16 @@ public class SequentialSequencerBar : MonoBehaviour
     public void Start()
     {
 
-        //masterDriver = GetComponent<SequencerDriver>();
+        // MAKE ONE LIST FOR EACH LOOP.
+
+        //1. Get parents of sequencers.
+        //foreach( SeqBarManager seqMang in placables.GetComponentsInChildren<SeqBarManager>())
+        //{
+
+        //}
+        //SeqBarManager[] seqBarManagers = ;
+
+
 
         foreach (Transform child in sequenceBar.transform)
         {
@@ -72,15 +83,15 @@ public class SequentialSequencerBar : MonoBehaviour
         foreach (SequencerDriver driver in driversToPlay)
         {
             // If there is only the metronome/ticker on the driver, enable it.
-            if(driver.sequencers.Length == 1)
-            {
-                driver.GetComponent<SeqBlockHandler>().TickToggle(true);
+            //if(driver.sequencers.Length == 1)
+            //{
+            //    driver.GetComponent<SeqBlockHandler>().TickToggle(true);
                 
-            }
-            else
-            {
-                driver.GetComponent<SeqBlockHandler>().TickToggle(false);
-            }
+            //}
+            //else
+            //{
+            //    driver.GetComponent<SeqBlockHandler>().TickToggle(false);
+            //}
 
             driver.OnLoop += WhenSeqLoops;
 

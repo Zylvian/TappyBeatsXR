@@ -93,21 +93,21 @@ AudioSource:
   m_GameObject: {fileID: 3387262552949628366}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: eacc80228cf27544696f4e3e14b9554e, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
+  Spatialize: 1
+  SpatializePostEffects: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -115,23 +115,23 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.002
       value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.9402771
+      inSlope: -0.08825138
+      outSlope: -0.08825138
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0.12314678
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -140,7 +140,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -217,5 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabRow: {fileID: 4844443383251086168, guid: 0ab0feddcf9114944b955f9f2c85c00d, type: 3}
-  buttonPrefab: {fileID: 3983558039070114803, guid: 1a76df9ae3b078345ba4948bf4a9631a, type: 3}
+  sequenceButtonPrefab: {fileID: 3983558039070114803, guid: 1a76df9ae3b078345ba4948bf4a9631a, type: 3}
+  playButtonPrefab: {fileID: 6293782215702940639, guid: 321ec58fe20b08c4b80305cbc518626b, type: 3}
   mrtkText: {fileID: 1901670883623412705, guid: be027555c6f29cf4692ba2b2a0d9f852, type: 3}

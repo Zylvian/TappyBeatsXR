@@ -53,7 +53,11 @@ public class SequenceBarCollision : MonoBehaviour
 
         if (!closest || currDistance < closestDist)
         {
-            if (closest) { closest.GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Standard); }
+            if (closest) {
+                SeqBlockHandler handler = closest.GetComponent<SeqBlockHandler>();
+                handler.ToggleMaterial(MatStates.Standard);
+                handler.RemoveBlock(this.transform.parent.gameObject);
+            }
 
             closest = other.gameObject;
             closestDist = currDistance;
@@ -69,6 +73,8 @@ public class SequenceBarCollision : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.tag != "Sequence") { return; }
+
+        //Debug.Log("exited " + other.gameObject.name);
 
         if(other.gameObject == closest)
         {

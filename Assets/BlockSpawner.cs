@@ -1,3 +1,4 @@
+using Microsoft.MixedReality.Toolkit.Utilities.Solvers;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ public class BlockSpawner : MonoBehaviour
     public SequencerDriver bassBlock;
     public SequencerDriver drumsBlock;
 
+    public Transform spawnHere;
+
+    public SolverHandler masterSolver;
+
     //[RequireComponent(typeof(Rigidbody))]
     public SequentialSequencerBar masterMan;
 
@@ -17,20 +22,27 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnBass()
     {
-        SequencerDriver childDriver = Instantiate(bassBlock, new Vector3(0, 0, 0.5f), Quaternion.identity, this.transform);
+        Transform target = masterSolver.TransformTarget;
+        Vector3 newPos = target.position + target.forward * 0.6f;
+        SequencerDriver childDriver = Instantiate(bassBlock, newPos, Quaternion.identity, spawnHere);
+
+        //childDriver.transform.LookAt(target, target.up);
+        //childDriver.transform.Rotate(Vector3.up, 180f);
         ContinueSpawn(childDriver);
         
     }
 
     public void SpawnLead()
     {
-        SequencerDriver childDriver = Instantiate(leadBlock, new Vector3(0, 0, 0.5f), Quaternion.identity, this.transform);
+        SequencerDriver childDriver = Instantiate(leadBlock, new Vector3(0, 0, 0.5f), Quaternion.identity, spawnHere);
         ContinueSpawn(childDriver);
     }
 
     public void SpawnDrums()
     {
-        SequencerDriver childDriver = Instantiate(drumsBlock, new Vector3(0, 0, 0.5f), Quaternion.identity, this.transform);
+        Transform target = masterSolver.TransformTarget;
+        Vector3 newPos = target.position + target.forward * 0.6f;
+        SequencerDriver childDriver = Instantiate(drumsBlock, newPos, Quaternion.identity, spawnHere);
         ContinueSpawn(childDriver);
     }
 
@@ -64,3 +76,5 @@ public class BlockSpawner : MonoBehaviour
         columns--;
     }
 }
+
+

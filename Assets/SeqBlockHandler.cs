@@ -38,7 +38,7 @@ public class SeqBlockHandler : MonoBehaviour
             fieldDriver.sequencers = driverList.ToArray();
         }
 
-
+        TickToggle(fieldDriver.sequencers.Length == 1);
         //seqBlock.SetActive(false);
     }
 
@@ -49,8 +49,14 @@ public class SeqBlockHandler : MonoBehaviour
         List<SequencerBase> driverList = fieldDriver.sequencers.ToList();
         driverList.Remove(driver);
         fieldDriver.sequencers = driverList.ToArray();
+
+        TickToggle(fieldDriver.sequencers.Length == 1);
     }
 
+
+    /* Enable or disable the ticks.
+     * 
+     */
     public void TickToggle(bool enable)
     {
         tickDriver.Mute(!enable);
@@ -66,8 +72,8 @@ public class SeqBlockHandler : MonoBehaviour
     {
 
         Bounds renderBounds = GetComponent<Renderer>().bounds;
-        Debug.Log(renderBounds);
-        Debug.Log(renderBounds.size);
+        //Debug.Log(renderBounds);
+        //Debug.Log(renderBounds.size);
         Vector3 objectScale = new Vector3(renderBounds.size.x/4, renderBounds.size.y, renderBounds.size.z);
         objectScale.Scale(new Vector3(0.93f, 0.93f, 0.93f));
 

@@ -14,6 +14,7 @@ public class RowsConstructor : MonoBehaviour
     [Min(1)]
     public int rows;
 
+    // This is set in RadioToSeq
     [NonSerialized]
     public int columns = 4;
 
@@ -49,16 +50,16 @@ public class RowsConstructor : MonoBehaviour
 
             RadioToSeq rad_seq = newRow.GetComponent<RadioToSeq>();
             rad_seq.SetColumnAmount(columns);
-            rad_seq.AddText(a.name);
 
-            rad_seq.Build();
-            // Add loop event to row/sequencer.
-            //newRow.OnLoop += masterDriver.SequencerLooped
+            rad_seq.AddText(a.name);
+            
+            rad_seq.Build(a);
 
             seqs.Add(newRow);
+            
             // Set sequencer sound.
-            //newRow.GetComponent<Sequencer>().SetAudioClip(a);
             newRow.SetAudioClip(a);
+
         }
 
 
