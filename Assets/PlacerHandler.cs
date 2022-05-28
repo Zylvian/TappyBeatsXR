@@ -17,6 +17,8 @@ public class PlacerHandler : MonoBehaviour
 
     private bool placed;
 
+    public bool enableSnapback = false;
+
     private void Awake()
     {
         solverman = GetComponent<TapToPlace>();
@@ -24,7 +26,10 @@ public class PlacerHandler : MonoBehaviour
 
     public void StartPlaced()
     {
-
+        if (!enableSnapback)
+        {
+            return;
+        }
         // If the object is placed, snap back to face.
         if (placed)
         {
@@ -33,7 +38,8 @@ public class PlacerHandler : MonoBehaviour
             transform.parent = origParent;
             BackToOrig();
             placed = false;
-            hider.SetActive(false);
+            if (hider) { hider.SetActive(false); };
+            
         }
         // If not, change the parent.
         else
@@ -48,7 +54,8 @@ public class PlacerHandler : MonoBehaviour
     {
         Debug.Log("AfterPlaced");
         placed = true;
-        hider.SetActive(true);
+
+        if (hider) { hider.SetActive(true); };
     }
 
     public void BackToOrig()

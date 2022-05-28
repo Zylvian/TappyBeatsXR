@@ -14,28 +14,15 @@ public class SequenceBarCollision : MonoBehaviour
     public Material hoverMat;
     public Material standardMat;
 
+    private Transform origParent;
+
     float hoverVal = 0.4f;
     float standardVal = 1f;
 
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    Debug.Log("we staying");
-    //    foreach(ContactPoint contact in collision.contacts)
-    //    {
-    //        Debug.DrawRay(contact.point, contact.normal, Color.white);
-
-    //        float currDistance = Vector3.Distance(contact.otherCollider.transform.position, transform.position);
-    //        Debug.Log("GO " + contact.otherCollider.name + " is " + currDistance + " units away");
-
-    //        if (!closest || currDistance < closestDist)
-    //        {
-
-    //            closest = contact.otherCollider.gameObject;
-    //            closestDist = currDistance;
-    //            //contact.otherCollider.gameObject.GetComponent<MeshRenderer>().material = hoverMat;
-    //        }
-    //    }
-    //}
+    private void Awake()
+    {
+        origParent = transform.parent;
+    }
 
 
     private void OnTriggerStay(Collider other)
@@ -64,6 +51,10 @@ public class SequenceBarCollision : MonoBehaviour
 
             //closest.GetComponent<MeshRenderer>().material = hoverMat;
             closest.GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Hover);
+
+            //Swap parent
+            //transform.parent = other.gameObject.transform;
+
             //closest.GetComponent<Renderer>().sharedMaterial.SetFloat("_Smoothness", hoverVal);
         }
         
@@ -82,6 +73,9 @@ public class SequenceBarCollision : MonoBehaviour
             handler.ToggleMaterial(MatStates.Standard);
             handler.RemoveBlock(this.transform.parent.gameObject);
             closest = null;
+
+            //Swap parent
+            transform.parent = origParent;
         }
     }
 

@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2352276175584710491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2352276175584710484}
-  m_Layer: 2
-  m_Name: BlockLeader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2352276175584710484
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2352276175584710491}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.26742706, y: 1.5951964, z: 8.811723}
-  m_LocalScale: {x: 2.571414, y: 10.684503, z: 86.389465}
-  m_Children: []
-  m_Father: {fileID: 2352276176160567058}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2352276175585183374
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +437,6 @@ Transform:
   - {fileID: 2352276175802642107}
   - {fileID: 2352276176168709998}
   - {fileID: 2352276177234639653}
-  - {fileID: 2352276175584710484}
   - {fileID: 2353908454633861022}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -686,6 +655,7 @@ MonoBehaviour:
   placedParent: {fileID: 0}
   masterSolver: {fileID: 0}
   hider: {fileID: 2352276177234639652}
+  enableSnapback: 0
 --- !u!114 &7515141116352627792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1579,7 +1549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010330146594, guid: 2d145caa42b44bd42aac79a42eba3d7c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000010330146594, guid: 2d145caa42b44bd42aac79a42eba3d7c, type: 3}
       propertyPath: m_LocalScale.x

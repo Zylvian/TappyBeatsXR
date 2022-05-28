@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MikseMann 4 - Sequence Bar.unity
     guid: 39074409a989dfb4cbd21d1b23e6be02
+  - enabled: 1
+    path: Assets/Scenes/MikseMann 5 - Multiple Simultaneous Loops.unity
+    guid: 1fc301433ec6f094dbc560e852d9f642
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 83e692a67f1d6ce4e9962c0005a73cb9, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 8d3fbfc6da480e448b0c84295ff7a105, type: 2}

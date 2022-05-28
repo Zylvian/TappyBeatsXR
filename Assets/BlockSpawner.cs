@@ -16,34 +16,46 @@ public class BlockSpawner : MonoBehaviour
     public SolverHandler masterSolver;
 
     //[RequireComponent(typeof(Rigidbody))]
-    public SequentialSequencerBar masterMan;
+    //public SequentialSequencerBar masterMan;
+
+    public LoopManager loopManager;
+
+    public SliderToBPM bpmRef;
 
     private int columns = 4;
 
     public void SpawnBass()
     {
-        Transform target = masterSolver.TransformTarget;
-        Vector3 newPos = target.position + target.forward * 0.6f;
-        SequencerDriver childDriver = Instantiate(bassBlock, newPos, Quaternion.identity, spawnHere);
 
-        //childDriver.transform.LookAt(target, target.up);
-        //childDriver.transform.Rotate(Vector3.up, 180f);
+        //SequencerDriver childDriver = Instantiate(bassBlock, newPos, Quaternion.identity, spawnHere);
+
+        SequencerDriver childDriver = SpawnInstrument(bassBlock);
         ContinueSpawn(childDriver);
         
     }
 
     public void SpawnLead()
     {
-        SequencerDriver childDriver = Instantiate(leadBlock, new Vector3(0, 0, 0.5f), Quaternion.identity, spawnHere);
+        SequencerDriver childDriver = SpawnInstrument(leadBlock);
         ContinueSpawn(childDriver);
     }
 
     public void SpawnDrums()
     {
-        Transform target = masterSolver.TransformTarget;
-        Vector3 newPos = target.position + target.forward * 0.6f;
-        SequencerDriver childDriver = Instantiate(drumsBlock, newPos, Quaternion.identity, spawnHere);
+        SequencerDriver childDriver = SpawnInstrument(drumsBlock);  
         ContinueSpawn(childDriver);
+    }
+
+    public SequencerDriver SpawnInstrument(SequencerDriver instrument)
+    {
+        Transform target = masterSolver.TransformTarget;
+        Vector3 newPos = target.position + target.forward * 0.6f + new Vector3(0,0,-0.03f); //new Vector3(-0.3f, 0.05f, 0.05f)
+
+        SequencerDriver childDriver = Instantiate(instrument, newPos, Quaternion.identity, spawnHere);
+        childDriver.SetBpm(bpmRef.GetBpm());
+        return childDriver;
+        //return Instantiate(bassBlock, spawnHere, spawnHere.forward.);
+        //return Instantiate(instrument, spawnHere);
     }
 
     public void ContinueSpawn(SequencerDriver childDriver)
@@ -53,16 +65,16 @@ public class BlockSpawner : MonoBehaviour
         //
 
         asd.columns = columns;
-        asd.Build();
+        asd.Build(childDriver.gameObject.transform);
 
-        SequencerDriver masterDriver = GetComponent<SequencerDriver>();
-        List<SequencerBase> currList = masterDriver.sequencers.ToList();
+        //SequencerDriver masterDriver = GetComponent<SequencerDriver>();
+        //List<SequencerBase> currList = masterDriver.sequencers.ToList();
 
-        currList.Add(childDriver);
+        //currList.Add(childDriver);
 
         // Updates bpm for all blocks
-        GetComponent<SequentialSequencerBar>().SetBpmDefault();
-        //masterDriver.sequencers = currList.ToArray();
+        loopManager.SetBpmDefaultAll();
+        //GetComponent<SequentialSequencerBar>().SetBpmDefault();
     }
 
     public void IncreaseColumns()

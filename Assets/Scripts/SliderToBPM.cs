@@ -21,22 +21,12 @@ public class SliderToBPM : SliderAbstract
     //public HelperMetronome metro;
 
     //public SequencerDriver driverman;
-    public SequentialSequencerBar seqMan;
-    
-
+    public LoopManager seqMan;
 
     public void UpdateBpm()
     {
 
-        // Base value is 50
-        float currVal = GetSliderValue();
-
-        if (currVal <= 0.1)
-        {
-            currVal = 0.1f;
-        }
-
-        int newBpm = (int)(currVal * 100 + 30);
+        int newBpm = GetBpm();
 
         //driverman.SetBpm(currBpm);
         seqMan.SetBpm(newBpm);
@@ -49,5 +39,19 @@ public class SliderToBPM : SliderAbstract
     private void UpdateBpmText(int bpm)
     {
         bpmText.text = bpm.ToString();
+    }
+
+    public int GetBpm()
+    {
+        // Base value is 50
+        float currVal = GetSliderValue();
+
+        if (currVal <= 0.1)
+        {
+            currVal = 0.1f;
+        }
+
+        int newBpm = (int)(currVal * 100 + 30);
+        return newBpm;
     }
 }

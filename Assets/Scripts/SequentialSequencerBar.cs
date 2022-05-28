@@ -13,6 +13,8 @@ public class SequentialSequencerBar : MonoBehaviour
 
     [NonSerialized]
     public List<SequencerDriver> driversToPlay = new List<SequencerDriver>();
+
+    public List<List<SequencerDriver>> simulDriversToPlay = new List<List<SequencerDriver>>();
     //private SequencerDriver masterDriver;
 
     private int currField = 0;
@@ -25,18 +27,25 @@ public class SequentialSequencerBar : MonoBehaviour
 
     private static int defaultBPM = 80;
 
+    public LoopManager manager;
+
+    public bool queueNow = false;
+
+    private bool routineRunning = false;
+
     public void Start()
     {
 
         // MAKE ONE LIST FOR EACH LOOP.
 
-        //1. Get parents of sequencers.
-        //foreach( SeqBarManager seqMang in placables.GetComponentsInChildren<SeqBarManager>())
+        ////1. Get parents of sequencers.
+        //foreach (SeqBarManager seqMang in placables.GetComponentsInChildren<SeqBarManager>())
         //{
+        //    seqMang.sequencerBarParent.GetComponentsInChildren<SequencerDriver>();
+
 
         //}
         //SeqBarManager[] seqBarManagers = ;
-
 
 
         foreach (Transform child in sequenceBar.transform)
@@ -46,14 +55,26 @@ public class SequentialSequencerBar : MonoBehaviour
         }
     }
 
+    public void PrepPlay()
+    {
+        if (!isPlaying)
+        {
+            FetchDrivers();
+        }
+    }
+
+    /**
+     * Does not fetch drivers, only plays.
+     */
     public void Play()
     {
         if (!isPlaying) {
-            FetchDrivers();
+
             Debug.Log(driversToPlay.Count);
             driversToPlay[currField].Play();
-            driversToPlay[currField].GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Play);
+            //driversToPlay[currField].GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Play);
             isPlaying = true;
+
         }
         else
         {
@@ -94,6 +115,7 @@ public class SequentialSequencerBar : MonoBehaviour
             //}
 
             driver.OnLoop += WhenSeqLoops;
+            //driver.OnLoop += async (s, e) => await AsyncTest();
 
         }
 
@@ -108,19 +130,37 @@ public class SequentialSequencerBar : MonoBehaviour
         }
     }
 
+
     public void WhenSeqLoops()
     {
-        //Debug.Log("TESTINGMAN HEI HEI HEI LOOP LOOP");
-        Debug.LogWarning("Current driver that looped: " + currField);
+        // Check Audio.dspTime
+        Debug.LogWarning(this.name + " -- time: " + AudioSettings.dspTime);
+
+        manager.ReadyForNext();
+
+        if (!routineRunning) { StartCoroutine(QueueNextOnTime()); };
+        
+
+    }
+
+    private IEnumerator QueueNextOnTime()
+    {
+        routineRunning = true;
         driversToPlay[currField].Stop();
         driversToPlay[currField].GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Standard);
         currField++;
-        Debug.LogWarning("Next driver to play: " + currField);
-        if(currField > driversToPlay.Count - 1) { currField = 0; }
-        Debug.LogWarning("Playing field: " + currField);
+        Debug.LogWarning("Waited from: " + Time.time);
+        yield return new WaitUntil(() => queueNow == true);
+        Debug.LogWarning("Waited until: " + Time.time);
+
+        Debug.LogWarning(this.name + " - Next driver to play: " + currField);
+        if (currField > driversToPlay.Count - 1) { currField = 0; }
+        Debug.LogWarning(this.name + "Playing field: " + currField);
         driversToPlay[currField].Play();
         driversToPlay[currField].GetComponent<SeqBlockHandler>().ToggleMaterial(MatStates.Play);
 
+        queueNow = false;
+        routineRunning = false;
     }
 
     public void SetBpm(int bpm)

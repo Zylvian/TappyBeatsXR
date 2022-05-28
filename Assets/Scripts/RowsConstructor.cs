@@ -30,7 +30,7 @@ public class RowsConstructor : MonoBehaviour
     public List<Sequencer> seqs;
 
     // Start is called before the first frame update
-    public void Build()
+    public void Build(Transform parentPlate)
     {
 
         // Load all audio files and create a row for each one.
@@ -47,6 +47,7 @@ public class RowsConstructor : MonoBehaviour
 
 
             Sequencer newRow = Instantiate(rowPrefab, new Vector3(0, 0, 0), Quaternion.identity, this.transform);
+            //Sequencer newRow = Instantiate(rowPrefab, parentPlate);
 
             RadioToSeq rad_seq = newRow.GetComponent<RadioToSeq>();
             rad_seq.SetColumnAmount(columns);
